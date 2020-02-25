@@ -1,12 +1,9 @@
 import React, { useState } from "react";
 import classnames from "classnames";
-import { Sidebar, Menu, Icon, Image, Accordion, Button, Dropdown } from "semantic-ui-react";
+import { Sidebar, Menu, Icon, Image, Accordion, Dropdown } from "semantic-ui-react";
 
 const LeftSidebar = ({minimized}) => {
   const [activeIndex, setActiveIndex] = useState(0);
-  const [isHidden, setHidden] = useState(true);
-  // const [isMinimized, setMinimized] = useState(false);
-  // const [isMState, setMState] = useState(false);
 
 	const handleClick = (e, { index }) => {
     if (index !== activeIndex) {
@@ -16,28 +13,22 @@ const LeftSidebar = ({minimized}) => {
     }
   }
 
-  const toggleSidebar = (e) => {
-    setHidden(!isHidden);
-  }
-
+  // Full screen sidebar
   if (!minimized) {
     return (
       <Sidebar
         as={Menu}
         inverted
         vertical
-        animation="push"
-        className={classnames('borderless sidemenu grey', {'very thin icon': minimized})}
-        visible={isHidden}
+        animation="overlay"
+        className={classnames('borderless sidemenu grey', {'thin': !minimized})}
         icon="labeled"
+        visible
         // width="thin"
       >
           <Menu.Item as="a" className="logo">
             <Image src="img/logo.png" hidden={minimized} />
             <Image src="img/thumblogo.png" hidden={!minimized} />
-          </Menu.Item>
-          <Menu.Item>
-            <Button name="toggle-sidebar" onClick={toggleSidebar} >Toggle</Button>
           </Menu.Item>
           <Accordion inverted>
             <Accordion.Title as="a" className="item"
@@ -130,19 +121,18 @@ const LeftSidebar = ({minimized}) => {
       </Sidebar>
     );
   }else {
+    // Minimized sidebar
     return (
       <Sidebar
         as={Menu}
         inverted
         vertical
-        animation="push"
+        visible
+        animation="overlay"
         className={classnames('borderless sidemenu grey', {'very thin icon': minimized})}
-        visible={isHidden}
-        icon="labeled"
-        // width="thin"
       >
         <Menu.Item as="a" className="logo">
-          <Image src="img/thumblogo.png" />
+          <Image src="img/thumblogo.png" ui={false} />
         </Menu.Item>
         <Dropdown item icon="dashboard" scrolling>
           <Dropdown.Menu className="transition">

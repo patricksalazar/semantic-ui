@@ -163,9 +163,13 @@ html.ios body {
 .filtr-item img {
     width: 100px;
 }
-.marginlefting {
+.pushermin {
     margin-left: 60px !important;
 }
+.pushermax {
+    margin-left: 150px !important;
+}
+
 .displaynone {
     display: none !important;
 }
@@ -995,10 +999,10 @@ a.item.transition {
 .sidemenu .item {
     color: rgba(224, 219, 219, 0.9);
 }
-.ui.left.sidebar,
+/* .ui.left.sidebar,
 .ui.right.sidebar {
     width: 190px;
-}
+} */
 
 
 .hiddenCollapse .statistics .label {

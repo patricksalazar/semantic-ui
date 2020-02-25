@@ -47,7 +47,7 @@ const suggestedByFriends = [
 
 // ui equal width left aligned padded grid stackable
 // ui stackable padded left aligned equal width grid
-const NavMenu = ({handleLeftSidebar}) => { 
+const NavMenu = ({handleLeftSidebar, handleRightSidebar}) => { 
   const [activeItem, setActiveItem] = useState('gamepad');
 
   const handleItemClick = (e, { name }) => setActiveItem(name);
@@ -57,38 +57,38 @@ const NavMenu = ({handleLeftSidebar}) => {
     toggleFullScreen(document.body);
   }
 
-  return(
-	<Menu icon borderless className="grid" data-color="inverted white">
-		<Menu.Item
-			name="leftside"
-      className="labeled leftside"
-			active={activeItem === "leftside"}
-      onClick={handleLeftSidebar}
-		>
-			<Icon name="bars" size="big" />
-		</Menu.Item>
+  const iconSize = "big";
+  return (
+    <Menu icon borderless className="grid" data-color="inverted white" secondary>
+      <Menu.Item
+        name="leftside"
+        className="labeled leftside"
+        active={activeItem === "leftside"}
+        onClick={handleLeftSidebar}
+      >
+        <Icon name="bars" size={iconSize} />
+      </Menu.Item>
 
-		<Menu.Item
-			name="fullscreen"
-      className="labeled expand"
-			active={activeItem === "fullscreen"}
-			onClick={handleFullScreen}
-		>
-			<Icon name="expand arrows alternate" size="big" />
-		</Menu.Item>
+      <Menu.Item
+        name="fullscreen"
+        className="labeled expand"
+        active={activeItem === "fullscreen"}
+        onClick={handleFullScreen}
+      >
+        <Icon name="expand arrows alternate" size={iconSize} />
+      </Menu.Item>
 
-		<Menu.Item
-			name="search"
-			active={activeItem === "search"}
-			onClick={handleItemClick}
-		>
-			<Input className='icon' icon='search' placeholder='Search...' />
-		</Menu.Item>
-    <Menu.Menu position='right'>
-      <Menu.Item>
+      <Menu.Item
+        name="search"
+        active={activeItem === "search"}
+        onClick={handleItemClick}
+      >
+        <Input className='icon' icon='search' placeholder='Search...' />
+      </Menu.Item>
+      <Menu.Item position="right">
         <Dropdown item className="labeled" 
-          icon={<Icon.Group size='large'>
-            <Icon name='bell' />
+          icon={<Icon.Group>
+            <Icon name='bell' size="big" />
             <div className="ui circular floating red mini label ">10</div>
           </Icon.Group>}
         >
@@ -105,7 +105,8 @@ const NavMenu = ({handleLeftSidebar}) => {
         </Dropdown>
       </Menu.Item>
       <Menu.Item>
-        <Dropdown item className="labeled" icon={{ name:'user', size: 'large', text:""}} >
+        <Dropdown item className="labeled" icon={{ name:'user', size: 'big', text:""}} >
+        {/* <Dropdown item className="labeled" image={<Image avatar={true} src="../img/avatar/people/enid.png"/>} > */}
           <Dropdown.Menu direction="left">
             <Dropdown.Item key="mail" as="a" href="mail.html">Inbox</Dropdown.Item>
             <Dropdown.Item key="profile" as="a" href="profile.html">Profile</Dropdown.Item>
@@ -123,8 +124,15 @@ const NavMenu = ({handleLeftSidebar}) => {
       >
         <Image avatar src="../img/avatar/people/enid.png"/>
       </Menu.Item>
-    </Menu.Menu>
-	</Menu>
-);
+      <Menu.Item
+        name='rightsidebar'
+        text=""
+        active={activeItem === 'rightsidebar'}
+        onClick={handleRightSidebar}
+      >
+        <Icon name='settings' size='big' text='' value='' />
+      </Menu.Item>
+    </Menu>
+  );
 }
 export default NavMenu;
